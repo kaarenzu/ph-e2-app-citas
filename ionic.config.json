@@ -1,0 +1,7 @@
+{
+  "name": "evaluacion-2-app-citas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
