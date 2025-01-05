@@ -1,0 +1,17 @@
+<ion-list>
+
+  <ion-item *ngFor="let c of cita">
+    <ion-label>
+      {{c.cita}}
+    </ion-label>
+    <br />
+    <ion-label>
+      {{c.autor}}
+    </ion-label>
+    <span #spanId style="display:none;">{{c.id}}</span>
+    <ion-button (click)="onClick()" slot="end" fill="clear">
+
+      <ion-icon name="trash-outline" slot="end" color="blue"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>

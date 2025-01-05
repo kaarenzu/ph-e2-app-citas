@@ -1,0 +1,18 @@
+<ion-input [(ngModel)]="citaStr" label="Cita" labelPlacement="floating" [counter]="true" minlength="5"
+  #citaInput="ngModel" required />
+<ion-input [(ngModel)]="autorStr" label="Autor" labelPlacement="floating" [counter]="true" minlength="2"
+  #autorInput="ngModel" required />
+<ion-button [disabled]="!citaInput.valid && !autorInput.valid" (click)="onClick()" slot="end" fill="clear"
+  aria-label="Botón para agregar citas a la lista">
+  <ion-icon slot="icon-only" name="add-outline" />
+  Agregar
+</ion-button>
+<ion-item *ngIf="!citaInput.valid && !citaInput.pristine">
+  <ion-text color="danger">
+    Escriba un cita de al menos 5 letras
+  </ion-text>
+  <ion-item *ngIf="!autorInput.valid && !autorInput.pristine">
+    <ion-text color="danger">
+      Escriba un autor de al menos 2 letras
+    </ion-text>
+  </ion-item>
