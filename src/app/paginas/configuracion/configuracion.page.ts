@@ -13,7 +13,7 @@ import { IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, 
 export class ConfiguracionPage implements OnInit {
 
   constructor() { }
-
+  // En esta vista no alcance a agregar la logica por temas de tiempo
   ngOnInit() {
   }
 

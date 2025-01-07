@@ -17,7 +17,6 @@ export class CitaListComponent implements OnInit {
   id?: number
   @Output() onCreate = new EventEmitter<number>()
 
-
   constructor() {
     addIcons({ trashOutline });
   }
@@ -25,6 +24,7 @@ export class CitaListComponent implements OnInit {
   ngOnInit() {
     addIcons({ trashOutline })
   }
+
   onClick() {
     this.onCreate.emit(this.id)
     console.log("eliminar cita", this.id)

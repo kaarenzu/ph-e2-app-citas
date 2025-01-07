@@ -9,11 +9,12 @@ import { Cita } from '../modelo/cita';
 })
 export class CitasService {
 
+  // Nueva conexión con la base de datos
   sqlite: SQLiteConnection = new SQLiteConnection(CapacitorSQLite)
   db!: SQLiteDBConnection;
   plataforma: string = ""
 
-
+  // Declaro las variables que utilizaremos para las configuraciones de la db
   DB_NAME: string = "lista_citas";
   DB_ENCRIPTADA: boolean = false;
   DB_MODE: string = "no-encryption";
@@ -22,6 +23,7 @@ export class CitasService {
   TABLE_NAME: string = "lista_citas";
   COL_CITA: string = "cita";
   COL_AUTOR: string = "autor";
+  // Query para crear la tabla que utlizaremos
   DB_SQL_TABLAS: string = `
     CREATE TABLE IF NOT EXISTS  ${this.TABLE_NAME}(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,6 +45,7 @@ export class CitasService {
       await this.sqlite.initWebStore()
     }
   }
+
 
   async iniciarPlugin() {
     this.plataforma = Capacitor.getPlatform()
@@ -81,25 +84,25 @@ export class CitasService {
     return resultado?.values ?? []
   }
 
+  // metodo para eliminar todos los reguistros de la tabla
   async delete(): Promise<void> {
     const sql = `DELETE FROM ${this.TABLE_NAME}`
     const resultado = await this.db.query(sql)
 
   }
 
+  // Agregar una cita a la db
   async agregarCita(c: Cita): Promise<void> {
     const sql = `INSERT INTO ${this.TABLE_NAME}(${this.COL_CITA}, ${this.COL_AUTOR}) VALUES(?, ?)`
     await this.db.run(sql, [c.cita, c.autor])
   }
 
+  // Método para obtener una cita random
   async obtenerCitaRandom(lista_citas: Cita[]): Promise<Cita> {
 
     const ind = Math.floor(Math.random() * lista_citas.length);
     const result = await lista_citas.splice(ind, 1)[0];
     console.log("cita", result.cita)
     return result
-    //const posicion = Math.floor(Math.random() * citas.length)
-    //const citaAleatoria = citas[posicion]
-    //return citaAleatoria
   }
 }

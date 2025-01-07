@@ -22,20 +22,19 @@ export class GestionCitasPage implements OnInit {
     private citaService: CitasService
   ) { }
 
+  // en este ciclo de vida del componente cargo cargo las citas.
   async ngOnInit() {
 
     await this._actualizar()
   }
 
+  // Funcion que actualiza las citas que existen en la db
   async _actualizar() {
     await this.citaService.iniciarPlugin()
     this.ListaCitas = await this.citaService.getCitas()
-
-
   }
-  // metodo para crear una nueva cita
+  // metodo para crear una nueva cita y actualiza - el autor no quedo dinamico no supe como capturar ese valor en un solo metodo.
   async onCreateCita($event: string) {
-    console.log("cita desde onCreate", $event)
     const cita: Cita = { cita: $event, autor: "no dinamico" }
     await this.citaService.agregarCita(cita)
     await this._actualizar()
@@ -43,8 +42,5 @@ export class GestionCitasPage implements OnInit {
 
   async onCreateAutor($event2: string) {
     console.log("autor desde onCreate", $event2)
-    //const cita: Cita = { cita: $event, autor: "no dinamico" }
-    //await this.citaService.agregarCita(cita)
-    //await this._actualizar()
   }
 }
